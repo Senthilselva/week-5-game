@@ -1,0 +1,32 @@
+body{
+	font-family: 'Mogra', cursive;
+	text-align: center;
+	background-image: url("../images/background.jpg");
+}
+
+.jumbotron{
+	
+}
+
+h1,
+.startgame,
+header{
+	font-size: 48px;
+  	text-shadow: 4px 4px 4px #aaa;
+	text-align:center;
+}
+
+/* initial page */
+.starGameJumbotron
+{
+	/*background-color: #ff00ff;s*/
+	padding: 200px;
+}
+
+#clock{
+  /*background: black;*/
+  color:green;
+  /*font-size: 120px;*/
+  font-family: monospace;
+  text-align: center;
+}
