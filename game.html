@@ -38,8 +38,8 @@
           <div class ="col-md-8 question"> </div>
         </div>
 
-        
-          <div class="row"> <!--row 2 in jumbotron -->
+          <!--row 2 with id answerDiv will be displayed when the question is showing-->
+          <div class="row" id="answerDiv"> <!--row 2 in jumbotron -->
             <div class = "col-md-2"><!--empty space --> </div>
             <div class = "col-md-8">
             <div class="radio">
@@ -62,12 +62,14 @@
                 <input type="radio" name="optionsRadios" id="optionsRadios3">
               </label>
             </div>
-
-
             </div><!-- div with radio buttons -->
             <div class = "col-md-2"><!--empty space --> </div>
           </div> <!--row 2 -->
-        
+
+          <!--row 2 with id Pic will be displayed when time is out or tha answer is selected -->
+          <div class="row" id="pictureDiv">
+          <a herf="#"> <img id="ansPic" alt= "image"/> </a>
+          </div><!--row2-->
 
       </div> <!-- close the jumbotron where the game happens-->
     </div><!-- col-md-9 -->
