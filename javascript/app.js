@@ -79,9 +79,8 @@ function newGame(){
     losses = 0;
     questionNum =0;
     time = startAt;
-//hide the last page
-//make the question visible 
-//selectAQuestion();
+    $('#gamePage').show();
+   $('#lastPage').hide();
 };
 
 function stop(){
@@ -123,7 +122,8 @@ function selectAQuestion(){
 
     return;
 }
-   document.write("hello");
+    endGame();
+   
 };
 
 function showAnsPic(){
@@ -160,19 +160,33 @@ var rightAnswer =  selectedQuestion.rightAnswer;
 };
 
 function playgame(){
-selectAQuestion();
-displayQusAndAns();
-startAt = 7;
-reset();
-ansWindowTimeOut=setTimeout(stop,7000);
-}
+    selectAQuestion();
+    displayQusAndAns();
+    startAt = 7;
+    reset();
+    ansWindowTimeOut=setTimeout(stop,7000);
+};
 
+function endGame(){
+    $('#gamePage').hide();
+    $('#lastPage').show();
+    $('.finalWin').html(wins);
+    $('.finalloss').html(losses);
+};
 
 //Start New game
 newGame();
-playgame();
 reset();
 run();
+playgame();
+
+//If the Start Over button is pressed any time
+$('.startOver').on('click', function(){
+    newGame();
+    reset();
+    playgame();  
+});
+
 
 //if the radio button is clicked 
     $('input').on('click',function(){
@@ -180,16 +194,26 @@ run();
 
         //check to see if data num value which is set to true or false depending on the txt behind it
         console.log(this);
-        console.log("nextsibiling" + $(this)[0].nextSibling.textContent);
-        console.log("data num" + $(this).data('num'));
+        //console.log("nextsibiling" + $(this)[0].nextSibling.textContent);
+        //console.log("data num" + $(this).data('num'));
+//*****************************************************************************
+//Wrote this to understand data-num but failed looks like I am missing some thing 
+//Should come back and fix this
+//*****************************************************************
+
+
         var check = $(this).data('num');
 
         
         if(check == true) {
             //feedback = $('input[data-num = "true"]').val();
            feedback = "Awesome! You are right!";
+           wins++;
+           $("#winDiv").html(wins);
         } else {
             feedback = "Nope! You are wrong";
+            losses++
+            $("#lossDiv").html(losses);
             //alert("wrong answer");
         } 
         clearTimeout(picWindowTimeOut); 
