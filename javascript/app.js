@@ -85,6 +85,8 @@ function newGame(){
 
 function stop(){
     feedback = "Time is Up";
+    losses++
+    $("#lossDiv").html(losses);
     showAnsPic();
 };
 

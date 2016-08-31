@@ -16,6 +16,17 @@ header{
 	text-align:center;
 }
 
+.question{
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+.radio{
+	font-size: 20px;
+	font-weight:bold;
+	text-align:left;
+
+}
 /* initial page */
 .starGameJumbotron
 {
