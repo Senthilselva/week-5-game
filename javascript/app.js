@@ -30,7 +30,15 @@ function decrement(){
         // The stop function 
 
 //*************************time functions End*****************
-
+//Changing start function
+$('.startgame').on('click',function(){
+  $('.firstPage').hide();
+  $('#gamePage').show(); 
+newGame();
+reset();
+run();
+playgame();
+});
 
 //Question object
 function questionObj(question,answerLs,posOfRightAnswer,pic){
@@ -54,9 +62,9 @@ function questionObj(question,answerLs,posOfRightAnswer,pic){
 var anslist=[];
 var questionList=[];
 anslist[0]=["Dom Perignon","Monte Cassino","Cluny Abbey","erheh"];
-questionList.push(new questionObj("Who was the legendary Benedictine monk who invented champagne?",anslist[0],0,"images/dom_perignon.gif"));
+questionList.push(new questionObj("Who was the legendary Benedictine monk who invented champagne?",anslist[0],0,"images/dom_perignon.jpg"));
 anslist[1]=["Lake Erie","Great Salt Lake","Lake St.Clair","Lake Superior"];
-questionList.push(new questionObj("Name the largest freshwater lake in the world?",anslist[1],3,"images/lake_superior.gif"));
+questionList.push(new questionObj("Name the largest freshwater lake in the world?",anslist[1],3,"images/lake_superior.jpg"));
 anslist[2]=["Asia","Europe","Moon","Mars"];
 questionList.push(new questionObj("Where would you find the Sea of Tranquility?",anslist[2],2,"images/moon.png"));
 anslist[3]=["Kite","Dictionary","Unicon","Water"];
@@ -79,6 +87,8 @@ function newGame(){
     losses = 0;
     questionNum =0;
     time = startAt;
+    $("#winDiv").html(wins);
+    $("#lossDiv").html(losses);
     $('#gamePage').show();
    $('#lastPage').hide();
 };
@@ -93,6 +103,7 @@ function stop(){
 
 function displayQusAndAns(){
     //displays the question on the screen
+    $('#clock').show()
     clearTimeout(picWindowTimeOut);
     $(".question").empty();
     $(".question").html(selectedQuestion.question);
@@ -113,7 +124,6 @@ function displayQusAndAns(){
 //Select a next question fuction
 function selectAQuestion(){
     if(questionNum<questionList.length){
-    //$('input').removeData('num');
 
         selectedQuestion = questionList[questionNum];
     
@@ -133,15 +143,16 @@ function showAnsPic(){
     //When showing the picture Answer time out is cancelled
     clearTimeout(ansWindowTimeOut);
 
+
+//there is a bug need to be fixed later ***************************************
 //******************************************************************************
     //get the text behind the right answer using data-num   
    // $('input[data-num = "true"]'). 
     // var rightAnsId = '#' + $('input[data-num = 1]').attr('id');
     // console.log("rightAnsId"+ rightAnsId);
     // var rightAnswer = $(rightAnsId)[0].nextSibling.textContent;
-//there is a bug need to be fixed later ********************************************
 
-//************************8quick fix**************************************8
+//************************quick fix**************************************8
 
 var rightAnswer =  selectedQuestion.rightAnswer;
 
@@ -152,12 +163,13 @@ var rightAnswer =  selectedQuestion.rightAnswer;
     $('#answerDiv').hide();
     $('#pictureDiv').show();
     var pichold=$('#ansPic');
-   // console.log(selectedQuestion.picture);
+  
     pichold.attr('src',selectedQuestion.picture);
     startAt = 3;
     reset();
+    $("#clock").hide();
     picWindowTimeOut = setTimeout(playgame, 3000);
-//console.log("value of picWindowTimeOut " + picWindowTimeOut);    
+    
 
 };
 
@@ -177,10 +189,10 @@ function endGame(){
 };
 
 //Start New game
-newGame();
-reset();
-run();
-playgame();
+// newGame();
+// reset();
+// run();
+// playgame();
 
 //If the Start Over button is pressed any time
 $('.startOver').on('click', function(){
@@ -192,7 +204,7 @@ $('.startOver').on('click', function(){
 
 //if the radio button is clicked 
     $('input').on('click',function(){
-        debugger;
+        //debugger;
 
         //check to see if data num value which is set to true or false depending on the txt behind it
         console.log(this);
@@ -204,9 +216,7 @@ $('.startOver').on('click', function(){
 //*****************************************************************
 
 
-        var check = $(this).data('num');
-
-        
+        var check = $(this).data('num'); 
         if(check == true) {
             //feedback = $('input[data-num = "true"]').val();
            feedback = "Awesome! You are right!";
@@ -216,11 +226,12 @@ $('.startOver').on('click', function(){
             feedback = "Nope! You are wrong";
             losses++
             $("#lossDiv").html(losses);
-            //alert("wrong answer");
         } 
         clearTimeout(picWindowTimeOut); 
         $(this).attr('checked', false);
         showAnsPic();
     });//Clicking on the radio button
 
+$("#lastPage").hide();
+$('#gamePage').hide();
 }); //closing on Document ready

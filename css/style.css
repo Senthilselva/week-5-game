@@ -41,3 +41,13 @@ header{
   font-family: monospace;
   text-align: center;
 }
+
+#pictureDiv img{
+	width:300px;
+	height:300px;
+	box-shadow: 5px;
+}
+
+/*#pictureDiv{
+	text-align: center;
+}*/
