@@ -5,7 +5,7 @@ $( document ).ready(function() {
 //**********************************************************
 var startAt=10;
 var time = startAt;
-
+var counter;
 function displayNumber(){
    // console.log(time);
     $('#clock').html('<h2>' + time + '</h2>');
@@ -80,8 +80,10 @@ var questionNum = 0;
 var feedback="";
 var picWindowTimeOut;
 var ansWindowTimeOut;
+var isWaiting = false;
 
 function newGame(){
+    isWaiting = false;
     selectedQuestion=[];
     wins = 0;
     losses = 0;
@@ -94,6 +96,9 @@ function newGame(){
 };
 
 function stop(){
+    if(isWaiting){
+        return;
+    }
     feedback = "Time is Up";
     losses++
     $("#lossDiv").html(losses);
@@ -124,23 +129,21 @@ function displayQusAndAns(){
 //Select a next question fuction
 function selectAQuestion(){
     if(questionNum<questionList.length){
-
         selectedQuestion = questionList[questionNum];
-    
-    
-    $('#answerDiv').show();
+        $('#answerDiv').show();
     $('#pictureDiv').hide();
         questionNum++
 
     return;
-}
+    }
+    isWaiting = true;
     endGame();
    
 };
 
 function showAnsPic(){
 
-    //When showing the picture Answer time out is cancelled
+    //When showing the picture Answer Window time out is cancelled
     clearTimeout(ansWindowTimeOut);
 
 
@@ -186,13 +189,12 @@ function endGame(){
     $('#lastPage').show();
     $('.finalWin').html(wins);
     $('.finalloss').html(losses);
+    window.clearTimeout(ansWindowTimeOut);
+    clearInterval(counter);
+    console.log("clear");
 };
 
-//Start New game
-// newGame();
-// reset();
-// run();
-// playgame();
+
 
 //If the Start Over button is pressed any time
 $('.startOver').on('click', function(){
