@@ -96,9 +96,9 @@ function newGame(){
 };
 
 function stop(){
-    if(isWaiting){
-        return;
-    }
+    // if(isWaiting){
+    //     return;
+    // }
     feedback = "Time is Up";
     losses++
     $("#lossDiv").html(losses);
